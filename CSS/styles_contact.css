@@ -1,0 +1,158 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* Blanc pour le fond */
+    color: #333;
+}
+
+/* En-tête */
+.header {
+    background-color: #C37BCF; /* Violet FindYourCourt */
+    text-align: center;
+    padding: 20px;
+    color: #fff; /* Texte blanc */
+}
+
+.header-content {
+    max-width: 900px;
+    margin: auto;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 10px auto;
+    width: 100px;
+    height: auto;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.search-bar input {
+    width: 80%;
+    max-width: 600px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Articles fréquemment lus */
+.frequently-asked {
+    margin: 20px auto;
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+.frequently-asked h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #AEE69A; /* Vert FindYourCourt */
+}
+
+/* Accordéon */
+.accordion-item {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.accordion-title {
+    background-color: #C37BCF; /* Violet FindYourCourt */
+    padding: 10px 15px;
+    margin: 0;
+    font-size: 18px;
+    color: #fff; /* Texte blanc */
+    cursor: pointer;
+}
+
+.accordion-title:hover {
+    background-color: #a159a7; /* Violet légèrement plus foncé */
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    padding: 0 15px;
+    background: #ffffff; /* Fond blanc pour le contenu */
+    color: #333; /* Texte noir */
+}
+
+.accordion-content p {
+    margin: 15px 0;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 200px; /* Ajustez selon le contenu */
+    padding: 10px 15px;
+}
+
+/* Footer */
+.support-chat {
+    text-align: center;
+    background-color: #000000; /* Noir */
+    border-top: 1px solid #ccc;
+    padding: 15px;
+    color: #ffffff; /* Texte blanc */
+}
+
+.support-chat button {
+    background-color: #ffffff; /* Bouton blanc */
+    color: #000000; /* Texte noir */
+    border: 2px solid #ffffff; /* Bordure blanche */
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.support-chat button:hover {
+    background-color: #ffffff; /* Garder le bouton blanc au survol */
+    color: #000000; /* Garder le texte noir */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-bar input {
+        width: 100%;
+    }
+
+    .accordion-title {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .support-chat button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .accordion-title {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .header h1 {
+        font-size: 18px;
+    }
+
+    .search-bar input {
+        padding: 8px;
+    }
+
+    .support-chat button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}

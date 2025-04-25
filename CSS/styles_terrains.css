@@ -1,0 +1,238 @@
+/* Règles globales */
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f7f7f7;
+
+}
+
+/* En-tête */
+.header {
+
+    width: 100%;
+    height: 110px;
+    background-color: #aee69a;
+    /* Violet principal */
+    color: rgb(10, 10, 10);
+    text-align: center;
+    padding-top: 20px;
+
+
+}
+
+.header_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.header_logo img {
+
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    animation: alternate-reverse;
+}
+
+
+
+h1 {
+
+    padding: 5px;
+    margin-bottom: 10px;
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+
+
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: auto;
+}
+
+a {
+    color: rgb(2, 2, 2);
+    text-decoration: none;
+
+}
+
+
+
+/* Contenu principal */
+main {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.terrain-section {
+    width: 50%;
+    background-color: #f3e5f5;
+    /* Violet clair */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.terrain {
+    margin-bottom: 20px;
+}
+
+.terrain img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.prix {
+    background-color: #A658AB;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 8px;
+    width: 80px;
+}
+
+button {
+    background-color: #A658AB;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #8FD496;
+}
+
+/* Image de la map */
+.map-image {
+    width: 100%;
+    /* L'image occupe toute la largeur */
+    height: 100%;
+    /* L'image occupe toute la hauteur */
+    object-fit: cover;
+    /* Gère le contenu sans le déformer */
+    border-radius: 5px;
+}
+
+/* Responsive Design */
+
+/* Pour tablettes (<=1024px) */
+@media (max-width: 1024px) {
+    main {
+        flex-wrap: wrap;
+        /* Les sections passent en colonne */
+    }
+
+    .terrain-section,
+    .map-section {
+        width: 100%;
+        /* Chaque section prend toute la largeur */
+        margin-bottom: 20px;
+        /* Espace entre les sections */
+    }
+
+    .map-section {
+        height: 400px;
+        /* Limite la hauteur de la carte sur tablette */
+    }
+}
+
+/* Pour mobiles (<=768px) */
+@media (max-width: 768px) {
+    .terrain img {
+        height: 150px;
+        /* Les images des terrains sont réduites */
+    }
+
+    .prix {
+        font-size: 18px;
+        width: 70px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .map-section {
+        height: 300px;
+        /* Réduit encore la hauteur de la carte */
+    }
+}
+
+/* Pour petits mobiles (<=480px) */
+@media (max-width: 480px) {
+    .terrain {
+        padding: 10px;
+    }
+
+    .terrain img {
+        height: 120px;
+        /* Encore plus petit pour les mobiles */
+    }
+
+    .prix {
+        font-size: 16px;
+        width: 60px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .map-section {
+        height: 250px;
+        /* Adapte la hauteur de l'image sur petits écrans */
+    }
+}
+
+
+/* Footer */
+.footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+    width: 100%;
+}
+
+.footer-links {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+footer p {
+    margin-top: 10px;
+    font-size: 14px;
+}

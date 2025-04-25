@@ -1,0 +1,174 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* Blanc pour le fond */
+    color: #333;
+}
+
+/* Header */
+.header {
+    background-color: #aee69a; /* Vert FindYourCourt */
+    text-align: center;
+    padding: 20px;
+    color: #000; /* Texte noir */
+}
+
+.header-content {
+    max-width: 900px;
+    margin: auto;
+}
+.header-nav ul {
+    list-style: none;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.header-nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.header-nav ul li a:hover {
+    color: #c37bcf; /* Violet standard au survol */
+}
+
+
+.logo {
+    display: block;
+    margin: 0 auto 10px auto;
+    width: 100px;
+    height: auto;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.search-bar input {
+    width: 80%;
+    max-width: 600px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Articles fréquemment lus */
+.frequently-asked {
+    margin: 20px auto;
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+.frequently-asked h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: black; /* Vert FindYourCourt */
+}
+
+/* Accordéon */
+.accordion-item {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.accordion-title {
+    background-color: #c37bcf; /* Violet FindYourCourt */
+    padding: 10px 15px;
+    margin: 0;
+    font-size: 18px;
+    color: #fff; /* Texte blanc */
+    cursor: pointer;
+}
+
+.accordion-title:hover {
+    background-color: #a159a7; /* Violet légèrement plus foncé */
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    padding: 0 15px;
+    background: #ffffff; /* Fond blanc pour le contenu */
+    color: #333; /* Texte noir */
+}
+
+.accordion-content p {
+    margin: 15px 0;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 200px; /* Ajustez selon le contenu */
+    padding: 10px 15px;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50; /* Fond sombre */
+    color: #fff; /* Texte blanc */
+    padding: 20px; /* Espacement intérieur */
+    text-align: center; /* Centrer le contenu */
+    margin-top: auto; /* S'assurer que le footer reste en bas */
+    width: 100%; /* Occupe toute la largeur */
+}
+
+.footer-links {
+    margin-bottom: 10px; /* Espacement entre les liens et le copyright */
+}
+
+.footer-links a {
+    color: #fff; /* Liens en blanc */
+    margin: 0 10px; /* Espacement horizontal entre les liens */
+    text-decoration: none; /* Pas de soulignement */
+}
+
+.footer-links a:hover {
+    text-decoration: underline; /* Soulignement au survol */
+}
+
+footer p {
+    margin-top: 10px; /* Espacement entre les liens et le texte de copyright */
+    font-size: 14px; /* Taille de police */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-bar input {
+        width: 100%;
+    }
+
+    .accordion-title {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .accordion-title {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .header h1 {
+        font-size: 18px;
+    }
+
+    .search-bar input {
+        padding: 8px;
+    }
+}
