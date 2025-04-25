@@ -54,7 +54,7 @@ Le fichier `findyourcourt.sql` contient la **structure** (MCD, MLD convertis en 
 ---
 
 ## Contact
-angenolwen@gmail.com (pour toute suggestion d'amélioration)
+simsremy71@gmail.com (pour toute suggestion d'amélioration)
 
 ---
 
