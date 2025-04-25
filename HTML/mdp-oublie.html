@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mot de Passe Oublié</title>
+    <link rel="stylesheet" href="style_mdpoublie.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mot de Passe Oublié</h1>
+        <?php
+        // Si le formulaire a été soumis
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            // Récupérer les données de l'utilisateur
+            $contact = htmlspecialchars($_POST['contact']);
+            
+            if (!empty($contact)) {
+                // Exemple de vérification basique (à compléter avec votre logique)
+                if (filter_var($contact, FILTER_VALIDATE_EMAIL) || preg_match('/^\+?[0-9]{10,15}$/', $contact)) {
+                    echo "<p>Un lien de réinitialisation a été envoyé à : <strong>$contact</strong>.</p>";
+                } else {
+                    echo "<p class='error'>Veuillez entrer une adresse e-mail ou un numéro de téléphone valide.</p>";
+                }
+            } else {
+                echo "<p class='error'>Le champ est vide. Veuillez réessayer.</p>";
+            }
+        } else {
+        ?>
+        <form action="" method="post">
+            <label for="contact">Entrez votre adresse mail ou numéro de téléphone</label>
+            <input type="text" id="contact" name="contact" required>
+            <button type="submit">Recevoir le lien</button>
+        </form>
+        <?php } ?>
+    </div>
+</body>
+</html>

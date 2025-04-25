@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire d'Inscription</title>
+    <link rel="stylesheet" href="style_inscription.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <img src="image/logo.png" alt="Logo FindYourCourt" class="logo">
+            <h1>FINDYOURCOURT</h1>
+        </div>
+    </header>
+
+    <!-- Formulaire d'inscription -->
+    <div class="Inscrivez-vous">
+        <h1>Inscrivez-vous</h1>
+        <form id="form-inscription" action="inscription.php" method="post">
+            <div>
+                <label for="Prénom">Votre Prénom</label>
+                <input type="text" id="Prénom" name="Prénom" placeholder="Prénom" required>
+            </div>
+            <div>
+                <label for="nom">Votre Nom</label>
+                <input type="text" id="nom" name="nom" placeholder="Nom" required>
+            </div>
+            <div>
+                <label for="email">Votre e-mail</label>
+                <input type="email" id="email" name="email" placeholder="monadresse@mail.com" required>
+            </div>
+            <div>
+                <label for="adresse">Votre adresse</label>
+                <input type="text" id="adresse" name="adresse" placeholder="Adresse" required>
+            </div>
+            <div>
+                <label for="date-naissance">Votre date de naissance</label>
+                <input type="date" id="date-naissance" name="date-naissance" required>
+            </div>
+            <div>
+                <label for="téléphone">Numéro de téléphone</label>
+                <input type="tel" id="téléphone" name="téléphone" placeholder="06..." required>
+            </div>
+            <div>
+                <label for="pseudo">Votre Pseudo</label>
+                <input type="text" id="pseudo" name="pseudo" placeholder="Pseudo" required>
+            </div>
+            <div>
+                <label for="mot_de_passe">Mot de Passe</label>
+                <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de Passe" required>
+                <small id="password-error" style="color: red; display: none;">Le mot de passe doit contenir au moins 8 caractères, 2 chiffres et un caractère spécial.</small>
+            </div>
+            <div>
+                <label for="niveau">Niveau</label>
+                <input type="text" id="niveau" name="niveau" placeholder="Niveau" required>
+            </div>
+            <div>
+                <label for="poste">Poste</label>
+                <input type="text" id="poste" name="poste" placeholder="Poste" required>
+            </div>
+            <div>
+                <button type="submit" class="button">S'inscrire</button>
+
+            </div>
+        </form>
+    </div>
+
+   <!-- Footer -->
+   <footer>
+    <div class="footer-links">
+        <a href="faq.php" class="button">FAQ</a>
+        <a href="cgu.php" class="button">CGU</a>
+        <a href="contact.php" class="button">Contacts</a>
+        <a href="mentionslegales.php" class="button">Mentions Légales</a>
+    </div>
+    <p>&copy; 2025 FindYourCourt. Tous droits réservés.</p>
+</footer>
+
+    <script>
+        // Validation du mot de passe
+        document.getElementById('form-inscription').addEventListener('submit', function(event) {
+            const passwordField = document.getElementById('mot_de_passe');
+            const passwordError = document.getElementById('password-error');
+            const password = passwordField.value;
+
+            // Regex pour valider le mot de passe
+            const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*\d.*\d)(?=.*[a-zA-Z]).{8,}$/;
+
+            if (!passwordRegex.test(password)) {
+                // Afficher le message d'erreur
+                passwordError.style.display = 'block';
+                event.preventDefault(); // Empêche l'envoi du formulaire
+            } else {
+                // Cacher le message d'erreur
+                passwordError.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

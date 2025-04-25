@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindYourCourt</title>
+    <link rel="stylesheet" href="styles_terrains.css">
+    <style>
+        /* Pop-up personnalisé */
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 1000;
+            display: none; /* Masqué par défaut */
+        }
+
+        #popup h3 {
+            margin-top: 0;
+        }
+
+        #popup button {
+            background-color: #c37bcf;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #popup button:hover {
+            background-color: #a159a7;
+        }
+
+        /* Overlay pour le fond */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none; /* Masqué par défaut */
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <div class="header">
+        <div class="header_logo">
+            <img src="image/logo.png" alt="Logo">
+            <h1>FindYourCourt</h1>
+        </div>
+        <div class="nav">
+            <div class="il1"><a href="accueil.php">Accueil</a></div>
+            <div class="il2"><a href="reservations.php">Réservations</a></div>
+            <div class="il3"><a href="parametres.html">Paramètres</a></div>
+            <div class="il4"><a href="profil.php">Profil</a></div>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main>
+        <!-- Section gauche : Terrains -->
+        <section class="terrain-section">
+            <h2>Terrains Disponibles</h2>
+
+            <!-- Terrain Quai des sportifs -->
+            <div id="terrain-1" class="terrain">
+                <form class="reservationForm">
+                    <img src="image/terrain_foot.jpg" alt="Terrain Quai des sportifs">
+                    <h3>Terrain Quai des sportifs</h3>
+                    <p><strong>Adresse :</strong> 12 Quai des sportifs, Issy-les-Moulineaux</p>
+                    <p><strong>Type :</strong> Football</p>
+                    <div class="prix">20€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="11:00 - 12:00" required> 11:00 - 12:00</label><br>
+                        <label><input type="radio" name="horaire" value="12:00 - 13:00"> 12:00 - 13:00</label><br>
+                        <label><input type="radio" name="horaire" value="14:00 - 15:00"> 14:00 - 15:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="1">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+
+            <!-- Stade des Quatre Saisons -->
+            <div id="terrain-2" class="terrain">
+                <form class="reservationForm">
+                    <img src="image/terrain_foot1.jpg" alt="Stade des Quatre Saisons">
+                    <h3>Stade des Quatre Saisons</h3>
+                    <p><strong>Adresse :</strong> 39 Boulevard des Marronniers, Issy-les-Moulineaux</p>
+                    <p><strong>Type :</strong> Football</p>
+                    <div class="prix">25€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="10:00 - 11:00" required> 10:00 - 11:00</label><br>
+                        <label><input type="radio" name="horaire" value="11:00 - 12:00"> 11:00 - 12:00</label><br>
+                        <label><input type="radio" name="horaire" value="12:00 - 13:00"> 12:00 - 13:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="2">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+
+            <!-- Stade Étoile d'Issy -->
+            <div id="terrain-3" class="terrain">
+                <form class="reservationForm">
+                    <img src="image/terrain_foot2.jpg" alt="Stade Étoile d'Issy">
+                    <h3>Stade Étoile d'Issy</h3>
+                    <p><strong>Adresse :</strong> 88 Avenue des Champions, Issy-les-Moulineaux</p>
+                    <p><strong>Type :</strong> Football</p>
+                    <div class="prix">30€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="13:00 - 14:00" required> 13:00 - 14:00</label><br>
+                        <label><input type="radio" name="horaire" value="14:00 - 15:00"> 14:00 - 15:00</label><br>
+                        <label><input type="radio" name="horaire" value="15:00 - 16:00"> 15:00 - 16:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="3">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Section droite : Map -->
+        <section class="map-section">
+            <img src="image/map_issi.jpeg" alt="Carte des terrains" class="map-image">
+        </section>
+    </main>
+
+    <!-- Pop-up et overlay -->
+    <div id="overlay"></div>
+    <div id="popup">
+        <h3 id="popup-message"></h3>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+    <script>
+        const forms = document.querySelectorAll('.reservationForm');
+        const popup = document.getElementById('popup');
+        const popupMessage = document.getElementById('popup-message');
+        const overlay = document.getElementById('overlay');
+
+        forms.forEach((form) => {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);
+
+                fetch('terrain.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        popupMessage.textContent = data.message; // Message de succès
+                        showPopup();
+                    } else {
+                        popupMessage.textContent = `Erreur : ${data.message}`; // Message d'erreur
+                        showPopup();
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur technique détectée :', error);
+                    popupMessage.textContent = 'Une erreur technique est survenue.';
+                    showPopup();
+                });
+            });
+        });
+
+        function showPopup() {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    </script>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="faq.php">FAQ</a>
+            <a href="cgu.php">CGU</a>
+            <a href="contacts.php">Contacts</a>
+            <a href="mentionslegales.php" class="button">Mentions Légales</a>
+        </div>
+        <p>&copy; 2025 FindYourCourt. Tous droits réservés.</p>
+    </div>
+</body>
+</html>

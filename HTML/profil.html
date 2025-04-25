@@ -1,0 +1,161 @@
+<?php
+// Démarrer la session
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['idutilisateur'])) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    header('Location: connexion1.php');
+    exit;
+}
+
+// Inclure la connexion à la base de données
+require 'connexion.php';
+
+try {
+    // Récupérer les informations de l'utilisateur depuis la base de données
+    $stmt = $pdo->prepare("SELECT email, pseudo FROM utilisateur WHERE idutilisateur = :id");
+    $stmt->bindParam(':id', $_SESSION['idutilisateur']);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        // Si aucune donnée utilisateur n'est trouvée, rediriger vers la connexion
+        header('Location: connexion.php');
+        exit;
+    }
+} catch (PDOException $e) {
+    die("Erreur lors de la récupération des données utilisateur : " . $e->getMessage());
+}
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - FindYourCourt</title>
+    <link rel="stylesheet" href="style_profil.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <img src="image/logo.png" alt="Logo FindYourCourt" class="logo">
+            <h1>FINDYOURCOURT</h1>
+            <ul>
+                <li><a href="accueil.php">Accueil</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Profil Section -->
+    <main class="profile-section">
+        <h2>Mon compte</h2>
+        <p class="profile-description">Gérez vos informations personnelles et vos activités.</p>
+
+        <div class="profile-card">
+            <!-- Email -->
+            <div class="profile-item">
+                <span id="email"><?php echo htmlspecialchars($user['email']); ?></span>
+                <button class="edit-button" onclick="editEmail()">Modifier mon email</button>
+            </div>
+
+            <!-- Pseudo -->
+            <div class="profile-item">
+                <span id="pseudo"><?php echo htmlspecialchars($user['pseudo']); ?></span>
+                <button class="edit-button" onclick="editPseudo()">Modifier mon pseudo</button>
+            </div>
+        </div>
+
+        <!-- Section Simple -->
+        <section class="simple-section">
+            <h3>Bienvenue dans votre espace personnel</h3>
+            <p>Accédez rapidement à vos fonctionnalités favorites :</p>
+            <ul class="simple-links">
+                <li><a href="reservations.php" class="button-link">Mes réservations</a></li>
+                <li><a href="parametres.php" class="button-link">Paramètres du compte</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="faq.php" class="button">FAQ</a>
+            <a href="cgu.php" class="button">CGU</a>
+            <a href="contact.php" class="button">Contacts</a>
+            <a href="mentionslegales.php" class="button">Mentions Légales</a>
+        </div>
+        <p>&copy; 2025 FindYourCourt. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+    function editEmail() {
+        const emailSpan = document.getElementById('email');
+        const emailText = emailSpan.textContent;
+        emailSpan.innerHTML = `<input type="email" id="email-input" value="${emailText}">`;
+        const editButton = document.querySelector('.edit-button[onclick="editEmail()"]');
+        editButton.textContent = 'OK';
+        editButton.setAttribute('onclick', 'saveEmail()');
+    }
+
+    function saveEmail() {
+        const emailInput = document.getElementById('email-input');
+        const newEmail = emailInput.value;
+
+        // Appel AJAX pour mettre à jour l'email
+        fetch('modif_profil.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ champ: 'email', valeur: newEmail })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('email').textContent = newEmail;
+                const editButton = document.querySelector('.edit-button[onclick="saveEmail()"]');
+                editButton.textContent = 'Modifier mon email';
+                editButton.setAttribute('onclick', 'editEmail()');
+            } else {
+                alert('Erreur : ' + data.error);
+            }
+        });
+    }
+
+    function editPseudo() {
+        const pseudoSpan = document.getElementById('pseudo');
+        const pseudoText = pseudoSpan.textContent;
+        pseudoSpan.innerHTML = `<input type="text" id="pseudo-input" value="${pseudoText}">`;
+        const editButton = document.querySelector('.edit-button[onclick="editPseudo()"]');
+        editButton.textContent = 'OK';
+        editButton.setAttribute('onclick', 'savePseudo()');
+    }
+
+    function savePseudo() {
+        const pseudoInput = document.getElementById('pseudo-input');
+        const newPseudo = pseudoInput.value;
+
+        // Appel AJAX pour mettre à jour le pseudo
+        fetch('modif_profil.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ champ: 'pseudo', valeur: newPseudo })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('pseudo').textContent = newPseudo;
+                const editButton = document.querySelector('.edit-button[onclick="savePseudo()"]');
+                editButton.textContent = 'Modifier mon pseudo';
+                editButton.setAttribute('onclick', 'editPseudo()');
+            } else {
+                alert('Erreur : ' + data.error);
+            }
+        });
+    }
+</script>
+
+    
+</body>
+</html>

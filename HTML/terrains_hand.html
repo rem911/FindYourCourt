@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindYourCourt</title>
+    <link rel="stylesheet" href="styles_terrains.css">
+    <style>
+        /* Styles pour le pop-up */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
+
+        #popup h3 {
+            margin: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        #popup button {
+            background-color: #c37bcf;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #popup button:hover {
+            background-color: #a159a7;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <div class="header">
+        <div class="header_logo">
+            <img src="image/logo.png" alt="Logo">
+            <h1>FindYourCourt</h1>
+        </div>
+        <div class="nav">
+            <div class="il1"><a href="accueil.php">Accueil</a></div>
+            <div class="il2"><a href="reservations.php">Réservations</a></div>
+            <div class="il3"><a href="parametres.html">Paramètres</a></div>
+            <div class="il4"><a href="profil.php">Profil</a></div>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main>
+        <section class="terrain-section">
+            <h2>Terrains Disponibles</h2>
+
+            <!-- Terrain des Buclos -->
+            <div id="terrain-10" class="terrain">
+                <form class="reservationForm" action="terrain.php" method="POST">
+                    <img src="image/handball1.jpg" alt="Terrain des Buclos">
+                    <h3>Terrain des Buclos</h3>
+                    <p><strong>Adresse :</strong> 2 rue Carnot, Issy-Les-Moulineaux</p>
+                    <p><strong>Type :</strong> Handball</p>
+                    <div class="prix">20€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="11:00 - 12:00" required> 11:00 - 12:00</label><br>
+                        <label><input type="radio" name="horaire" value="12:00 - 13:00"> 12:00 - 13:00</label><br>
+                        <label><input type="radio" name="horaire" value="14:00 - 15:00"> 14:00 - 15:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="10">
+                    <input type="hidden" name="nom" value="Terrain des Buclos">
+                    <input type="hidden" name="adresse" value="2 rue Carnot, Issy-Les-Moulineaux">
+                    <input type="hidden" name="type" value="terrain_handball">
+                    <input type="hidden" name="prix" value="20">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+
+            <!-- Terrain Reynies Bayard -->
+            <div id="terrain-11" class="terrain">
+                <form class="reservationForm" action="terrain.php" method="POST">
+                    <img src="image/handball2.jpg" alt="Terrain Reynies Bayard">
+                    <h3>Terrain Reynies Bayard</h3>
+                    <p><strong>Adresse :</strong> 25 rue Monge, Issy-Les-Moulineaux</p>
+                    <p><strong>Type :</strong> Handball</p>
+                    <div class="prix">25€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="11:00 - 12:00" required> 11:00 - 12:00</label><br>
+                        <label><input type="radio" name="horaire" value="12:00 - 13:00"> 12:00 - 13:00</label><br>
+                        <label><input type="radio" name="horaire" value="14:00 - 15:00"> 14:00 - 15:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="11">
+                    <input type="hidden" name="nom" value="Terrain Reynies Bayard">
+                    <input type="hidden" name="adresse" value="25 rue Monge, Issy-Les-Moulineaux">
+                    <input type="hidden" name="type" value="terrain_handball">
+                    <input type="hidden" name="prix" value="25">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+
+            <!-- Terrain La Palestre -->
+            <div id="terrain-12" class="terrain">
+                <form class="reservationForm" action="terrain.php" method="POST">
+                    <img src="image/handball3.jpg" alt="Terrain La Palestre">
+                    <h3>Terrain La Palestre</h3>
+                    <p><strong>Adresse :</strong> 17 rue Antoine Courbarien, Issy-Les-Moulineaux</p>
+                    <p><strong>Type :</strong> Handball</p>
+                    <div class="prix">30€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="11:00 - 12:00" required> 11:00 - 12:00</label><br>
+                        <label><input type="radio" name="horaire" value="12:00 - 13:00"> 12:00 - 13:00</label><br>
+                        <label><input type="radio" name="horaire" value="14:00 - 15:00"> 14:00 - 15:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="12">
+                    <input type="hidden" name="nom" value="Terrain La Palestre">
+                    <input type="hidden" name="adresse" value="17 rue Antoine Courbarien, Issy-Les-Moulineaux">
+                    <input type="hidden" name="type" value="terrain_handball">
+                    <input type="hidden" name="prix" value="30">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Section droite : Map -->
+        <section class="map-section">
+            <img src="image/map_issi.jpeg" alt="Carte des terrains" class="map-image">
+        </section>
+    </main>
+
+    <!-- Pop-up -->
+    <div id="overlay"></div>
+    <div id="popup">
+        <h3 id="popup-message"></h3>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+    <script>
+        document.querySelectorAll('.reservationForm').forEach(form => {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Empêche le rechargement de la page
+                const formData = new FormData(this);
+
+                fetch('terrain.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('popup-message').textContent = data.message;
+                    document.getElementById('popup').style.display = 'block';
+                    document.getElementById('overlay').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error(error);
+                    document.getElementById('popup-message').textContent = 'Erreur technique';
+                    document.getElementById('popup').style.display = 'block';
+                    document.getElementById('overlay').style.display = 'block';
+                });
+            });
+        });
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="faq.php">FAQ</a>
+            <a href="cgu.php">CGU</a>
+            <a href="contacts.php">Contacts</a>
+            <a href="mentionslegales.php" class="button">Mentions Légales</a>
+        </div>
+        <p>&copy; 2025 FindYourCourt. Tous droits réservés.</p>
+    </div>
+</body>
+</html>

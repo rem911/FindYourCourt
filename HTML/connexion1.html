@@ -1,0 +1,107 @@
+<?php
+// Démarrer la session pour gérer les connexions
+session_start();
+
+// Inclure le fichier de connexion à la base de données
+require 'connexion.php';
+
+// Initialisation de la variable d'erreur
+$error = "";
+
+// Si le formulaire est soumis
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupération et validation des données du formulaire
+    $pseudo = htmlspecialchars(trim($_POST['pseudo']));
+    $motDePasse = htmlspecialchars(trim($_POST['motDePasse']));
+
+    // Vérification que les champs ne sont pas vides
+    if (!empty($pseudo) && !empty($motDePasse)) {
+        try {
+            // Requête préparée pour rechercher l'utilisateur par pseudo ou email
+            $stmt = $pdo->prepare("
+                SELECT * FROM utilisateur 
+                WHERE LOWER(pseudo) = LOWER(:pseudo) OR LOWER(email) = LOWER(:pseudo)
+            ");
+            $stmt->bindParam(':pseudo', $pseudo);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Vérification du mot de passe
+            if ($user && password_verify($motDePasse, $user['mot_de_passe'])) {
+                // Si les identifiants sont corrects, enregistrer les infos de session
+                $_SESSION['idutilisateur'] = $user['idutilisateur'];
+                $_SESSION['pseudo'] = $user['pseudo'];
+                $_SESSION['email'] = $user['email'];
+
+                // Redirection vers la page d'accueil
+                header('Location: accueil.php');
+                exit;
+            } else {
+                // Identifiants incorrects
+                $error = "Pseudo ou mot de passe incorrect.";
+            }
+        } catch (PDOException $e) {
+            $error = "Erreur lors de la connexion à la base de données : " . $e->getMessage();
+        }
+    } else {
+        $error = "Veuillez remplir tous les champs.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Connexion</title>
+    <link rel="stylesheet" href="style_connexion1.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <img src="image/logo.png" alt="Logo" class="logo">
+            <h1>FINDYOURCOURT</h1>
+        </div>
+    </header>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <h1>Connexion</h1>
+        <!-- Affichage des messages d'erreur -->
+        <?php if (!empty($error)): ?>
+            <p style="color:red;"><?php echo $error; ?></p>
+        <?php endif; ?>
+        <form action="connexion1.php" method="post">
+            <div>
+                <label for="pseudo">Pseudo</label>
+                <input type="text" id="pseudo" name="pseudo" placeholder="Votre pseudo" required>
+            </div>
+            <div>
+                <label for="motDePasse">Mot de passe</label>
+                <input type="password" id="motDePasse" name="motDePasse" placeholder="Votre mot de passe" required>
+            </div>
+            <a href="reinitialisation_mdp.html">Mot de passe oublié ?</a>
+            <button type="submit">Se connecter</button>
+        </form>
+        <div class="signup">
+            <p>Vous n’avez pas de compte ? <a href="inscription.html">Inscrivez-vous</a></p>
+        </div>
+    </div>
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="faq.php" class="button">FAQ</a>
+            <a href="cgu.php" class="button">CGU</a>
+            <a href="contact.php" class="button">Contacts</a>
+            <a href="mentionslegales.php" class="button">Mentions Légales</a>
+        </div>
+        <p>&copy; 2025 FindYourCourt. Tous droits réservés.</p>
+    </footer>
+
+    <script src="connexion1.js"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindYourCourt</title>
+    <link rel="stylesheet" href="styles_terrains.css">
+</head>
+<body>
+    <!-- En-tête -->
+    <div class="header">
+        <div class="header_logo">
+            <img src="image/logo.png" alt="Logo">
+            <h1>FindYourCourt</h1>
+        </div>
+        <div class="nav">
+            <div class="il1"><a href="accueil.php">Accueil</a></div>
+            <div class="il2"><a href="reservations.php">Réservations</a></div>
+            <div class="il3"><a href="parametres.html">Paramètres</a></div>
+            <div class="il4"><a href="profil.php">Profil</a></div>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main>
+        <!-- Section gauche : Terrains -->
+        <section class="terrain-section">
+            <h2>Terrains Disponibles</h2>
+
+            <!-- Le Play Horizon -->
+            <div id="terrain-4" class="terrain">
+                <form>
+                    <img src="image/terrain_basket1.jpeg" alt="Le Play Horizon">
+                    <h3>Le Play Horizon</h3>
+                    <p><strong>Adresse :</strong> 42 rue du Général Leclerc, Issy-les-Moulineaux</p>
+                    <p><strong>Type :</strong> Basket</p>
+                    <div class="prix">20€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="11:00 - 12:00" required> 11:00 - 12:00</label><br>
+                        <label><input type="radio" name="horaire" value="12:00 - 13:00"> 12:00 - 13:00</label><br>
+                        <label><input type="radio" name="horaire" value="14:00 - 15:00"> 14:00 - 15:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="4">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+
+            <!-- Le Parquet Étoilé -->
+            <div id="terrain-5" class="terrain">
+                <form>
+                    <img src="image/terrain_basket2.jpeg" alt="Le Parquet Étoilé">
+                    <h3>Le Parquet Étoilé</h3>
+                    <p><strong>Adresse :</strong> 23 avenue Victor Cresson, Issy-les-Moulineaux</p>
+                    <p><strong>Type :</strong> Basket</p>
+                    <div class="prix">25€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="10:00 - 11:00" required> 10:00 - 11:00</label><br>
+                        <label><input type="radio" name="horaire" value="11:00 - 12:00"> 11:00 - 12:00</label><br>
+                        <label><input type="radio" name="horaire" value="12:00 - 13:00"> 12:00 - 13:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="5">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+
+            <!-- Le All Star -->
+            <div id="terrain-6" class="terrain">
+                <form>
+                    <img src="image/terrain_basket3.webp" alt="Le All Star">
+                    <h3>Le All Star</h3>
+                    <p><strong>Adresse :</strong> 15 rue Diderot, Issy-les-Moulineaux</p>
+                    <p><strong>Type :</strong> Basket</p>
+                    <div class="prix">30€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="13:00 - 14:00" required> 13:00 - 14:00</label><br>
+                        <label><input type="radio" name="horaire" value="14:00 - 15:00"> 14:00 - 15:00</label><br>
+                        <label><input type="radio" name="horaire" value="15:00 - 16:00"> 15:00 - 16:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="6">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+        </section>
+        <section class="map-section">
+            <img src="image/map_issi.jpeg" alt="Carte des terrains" class="map-image">
+        </section>
+    </main>
+
+    <!-- Pop-up -->
+    <div id="overlay"></div>
+    <div id="popup">
+        <h3 id="popup-message"></h3>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="faq.php">FAQ</a>
+            <a href="cgu.php">CGU</a>
+            <a href="contacts.php">Contacts</a>
+            <a href="mentionslegales.php" class="button">Mentions Légales</a>
+        </div>
+        <p>&copy; 2025 FindYourCourt. Tous droits réservés.</p>
+    </div>
+
+    <script>
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);
+                fetch('terrain.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const popup = document.getElementById('popup');
+                    const overlay = document.getElementById('overlay');
+                    const message = document.getElementById('popup-message');
+
+                    if (data.success) {
+                        message.textContent = data.message;
+                    } else {
+                        message.textContent = `Erreur : ${data.message}`;
+                    }
+
+                    popup.style.display = 'block';
+                    overlay.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            });
+        });
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+
+    <style>
+        /* Pop-up Styling */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            display: none;
+        }
+
+        #popup button {
+            margin-top: 10px;
+        }
+    </style>
+</body>
+</html>

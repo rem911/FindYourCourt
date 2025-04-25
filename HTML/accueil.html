@@ -1,0 +1,141 @@
+<?php
+// Démarrer la session pour gérer les connexions
+session_start();
+
+// Inclure le fichier de connexion à la base de données
+require 'connexion.php';
+
+// Initialisation de la variable d'erreur
+$error = "";
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindYourCourt</title>
+    <link rel="stylesheet" href="style_accueil.css?v=2">
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="image/logo.png" alt="Logo" class="logo">
+            <h1>FINDYOURCOURT</h1>
+        </div>
+        <div class="header-right">
+            <a href="profil.php" class="button">Mon Compte</a>
+            <a href="reservations.php" class="button">Réservations</a>
+            <a href="parametres.php" class="button">Paramètres</a>
+         </div>
+    </header>
+
+    <section class="search-section">
+    <div class="search-box">
+        <!-- Message de bienvenue -->
+        <div class="welcome-message">
+            <h2>Bienvenue, <?php echo htmlspecialchars($_SESSION['pseudo']); ?> !</h2>
+            <p>Prêt(e) à trouver un terrain et commencer votre match ?</p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Sports Grid with Images -->
+    <section class="sports-section">
+        <h2>Choisissez un sport</h2>
+        <div class="sports-grid">
+            <div class="sport">
+                <a href="terrains_foot.php">
+                    <img src="image/foot.jpeg" alt="Football" class="sport-img">
+                    <p>Football</p>
+                </a>
+            </div>
+            <div class="sport">
+                <a href="terrains_basket.php">
+                    <img src="image/basket.jpeg" alt="Basketball" class="sport-img">
+                    <p>Basketball</p>
+                </a>
+            </div>
+            <div class="sport">
+                <a href="terrains_tennis.php">
+                    <img src="image/tennis.jpeg" alt="Tennis" class="sport-img">
+                    <p>Tennis</p>
+                </a>
+            </div>
+            <div class="sport">
+                <a href="terrains_hand.php">
+                    <img src="image/handball.jpeg" alt="Handball" class="sport-img">
+                    <p>Handball</p>
+                </a>
+            </div>
+            <div class="sport">
+                <a href="terrains_volley.php">
+                    <img src="image/volley.jpeg" alt="Volleyball" class="sport-img">
+                    <p>Volleyball</p>
+                </a>
+            </div>
+            <div class="sport">
+                <a href="terrains_golf.php">
+                    <img src="image/golf.jpeg" alt="Golf" class="sport-img">
+                    <p>Golf</p>
+                </a>
+            </div>
+            <div class="sport">
+                <a href="terrains_badminton.php">
+                    <img src="image/badminton.jpeg" alt="Badminton" class="sport-img">
+                    <p>Badminton</p>
+                </a>
+            </div>
+            <div class="sport">
+                <a href="terrains_padel.php">
+                    <img src="image/padel.jpeg" alt="Padel" class="sport-img">
+                    <p>Padel</p>
+                </a>
+            </div>
+            <div class="sport">
+                <a href="terrains_pingpong.php">
+                    <img src="image/pingpong.jpeg" alt="Ping Pong" class="sport-img">
+                    <p>Ping Pong</p>
+                </a>
+            </div>
+            <div class="sport">
+                <a href="terrains_rugby.php">
+                    <img src="image/rugby.jpeg" alt="Rugby" class="sport-img">
+                    <p>Rugby</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Presentation Section -->
+    <section class="presentation-section">
+        <div class="presentation-box">
+            <h3>Réserver en quelques clics</h3>
+            <p>Avec FindYourCourt, trouvez et réservez facilement un terrain près de chez vous, en fonction de vos disponibilités et préférences.</p>
+        </div>
+        <div class="presentation-box">
+            <h3>Rejoignez une communauté sportive</h3>
+            <p>Connectez-vous avec d'autres passionnés pour organiser des matchs ou découvrir de nouveaux partenaires d'entraînement.</p>
+        </div>
+        <div class="presentation-box">
+            <h3>Des sports variés</h3>
+            <p>Choisissez parmi une large gamme de sports collectifs et individuels, avec des terrains adaptés à chaque discipline.</p>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="faq.php" class="button">FAQ</a>
+            <a href="cgu.php" class="button">CGU</a>
+            <a href="contact.php" class="button">Contacts</a>
+            <a href="mentionslegales.php" class="button">Mentions Légales</a>
+        </div>
+        <p>&copy; 2025 FindYourCourt. Tous droits réservés.</p>
+    </footer>
+    <script src="script_profil.js"></script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindYourCourt</title>
+    <link rel="stylesheet" href="styles_terrains.css">
+    <style>
+        /* Styles pour le pop-up */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
+
+        #popup h3 {
+            margin: 0 0 15px;
+            font-size: 18px;
+        }
+
+        #popup button {
+            background-color: #c37bcf;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #popup button:hover {
+            background-color: #a159a7;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <div class="header">
+        <div class="header_logo">
+            <img src="image/logo.png" alt="Logo">
+            <h1>FindYourCourt</h1>
+        </div>
+        <div class="nav">
+            <div class="il1"><a href="accueil.php">Accueil</a></div>
+            <div class="il2"><a href="reservations.php">Réservations</a></div>
+            <div class="il3"><a href="parametres.html">Paramètres</a></div>
+            <div class="il4"><a href="profil.php">Profil</a></div>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main>
+        <section class="terrain-section">
+            <h2>Terrains de Tennis Disponibles</h2>
+
+            <!-- Les Filets d'Azur -->
+            <div id="terrain-7" class="terrain">
+                <form class="reservationForm" action="terrain.php" method="POST">
+                    <img src="image/terrain_tennis.jpg" alt="Les Filets d'Azur">
+                    <h3>Les Filets d'Azur</h3>
+                    <p><strong>Adresse :</strong> 2 bis rue Hoche, Issy-les-Moulineaux</p>
+                    <p><strong>Type :</strong> Tennis</p>
+                    <div class="prix">20€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="11:00 - 12:00" required> 11:00 - 12:00</label><br>
+                        <label><input type="radio" name="horaire" value="12:00 - 13:00"> 12:00 - 13:00</label><br>
+                        <label><input type="radio" name="horaire" value="14:00 - 15:00"> 14:00 - 15:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="7">
+                    <input type="hidden" name="nom" value="Les Filets d'Azur">
+                    <input type="hidden" name="adresse" value="2 bis rue Hoche, Issy-les-Moulineaux">
+                    <input type="hidden" name="type" value="terrain_tennis">
+                    <input type="hidden" name="prix" value="20">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+
+            <!-- Le Court Emeraude -->
+            <div id="terrain-8" class="terrain">
+                <form class="reservationForm" action="terrain.php" method="POST">
+                    <img src="image/terrain_tennis1.jpeg" alt="Le Court Emeraude">
+                    <h3>Le Court Emeraude</h3>
+                    <p><strong>Adresse :</strong> 17 rue du Capitaine Ferber, Issy-les-Moulineaux</p>
+                    <p><strong>Type :</strong> Tennis</p>
+                    <div class="prix">25€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="10:00 - 11:00" required> 10:00 - 11:00</label><br>
+                        <label><input type="radio" name="horaire" value="11:00 - 12:00"> 11:00 - 12:00</label><br>
+                        <label><input type="radio" name="horaire" value="12:00 - 13:00"> 12:00 - 13:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="8">
+                    <input type="hidden" name="nom" value="Le Court Emeraude">
+                    <input type="hidden" name="adresse" value="17 rue du Capitaine Ferber, Issy-les-Moulineaux">
+                    <input type="hidden" name="type" value="terrain_tennis">
+                    <input type="hidden" name="prix" value="25">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+
+            <!-- Le Smash Club -->
+            <div id="terrain-9" class="terrain">
+                <form class="reservationForm" action="terrain.php" method="POST">
+                    <img src="image/terrain_tennis.jpg" alt="Le Smash Club">
+                    <h3>Le Smash Club</h3>
+                    <p><strong>Adresse :</strong> 5 rue Rouget de Lisle, Issy-les-Moulineaux</p>
+                    <p><strong>Type :</strong> Tennis</p>
+                    <div class="prix">30€</div>
+                    <div>
+                        <h4>Horaires disponibles :</h4>
+                        <label><input type="radio" name="horaire" value="13:00 - 14:00" required> 13:00 - 14:00</label><br>
+                        <label><input type="radio" name="horaire" value="14:00 - 15:00"> 14:00 - 15:00</label><br>
+                        <label><input type="radio" name="horaire" value="15:00 - 16:00"> 15:00 - 16:00</label>
+                    </div>
+                    <div>
+                        <h4>Choisissez une date :</h4>
+                        <input type="date" name="date_reservation" required>
+                    </div>
+                    <input type="hidden" name="idterrain" value="9">
+                    <input type="hidden" name="nom" value="Le Smash Club">
+                    <input type="hidden" name="adresse" value="5 rue Rouget de Lisle, Issy-les-Moulineaux">
+                    <input type="hidden" name="type" value="terrain_tennis">
+                    <input type="hidden" name="prix" value="30">
+                    <button type="submit">Choisir le terrain</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Section droite : Map -->
+        <section class="map-section">
+            <img src="image/map_issi.jpeg" alt="Carte des terrains" class="map-image">
+        </section>
+    </main>
+
+    <!-- Pop-up -->
+    <div id="overlay"></div>
+    <div id="popup">
+        <h3 id="popup-message"></h3>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+    <script>
+        document.querySelectorAll('.reservationForm').forEach(form => {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('popup-message').textContent = data.message || 'Réservation réussie.';
+                    document.getElementById('overlay').style.display = 'block';
+                    document.getElementById('popup').style.display = 'block';
+                })
+                .catch(error => {
+                    document.getElementById('popup-message').textContent = 'Une erreur est survenue.';
+                    document.getElementById('overlay').style.display = 'block';
+                    document.getElementById('popup').style.display = 'block';
+                });
+            });
+        });
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="faq.php">FAQ</a>
+            <a href="cgu.php">CGU</a>
+            <a href="contacts.php">Contacts</a>
+            <a href="mentionslegales.php" class="button">Mentions Légales</a>
+        </div>
+        <p>&copy; 2025 FindYourCourt. Tous droits réservés.</p>
+    </div>
+</body>
+</html>

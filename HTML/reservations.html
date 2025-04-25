@@ -1,0 +1,118 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+$host = 'sql209.infinityfree.com';
+$username = 'if0_38603909';
+$password = 'SLoMq5KWzR1Q7a';
+$database = 'if0_38603909_findyourcourt';
+$conn = new mysqli($host, $username, $password, $database);
+
+if ($conn->connect_error) {
+    die("Erreur de connexion : " . $conn->connect_error);
+}
+
+// Démarrer la session et vérifier si l'utilisateur est connecté
+session_start();
+if (!isset($_SESSION['idutilisateur'])) {
+    header('Location: connexion1.php'); // Rediriger si l'utilisateur n'est pas connecté
+    exit();
+}
+
+$idutilisateur = $_SESSION['idutilisateur'];
+
+// Récupérer toutes les réservations de l'utilisateur, y compris la date de la réservation
+$query = "
+    SELECT r.idterrain, r.horaire, r.date_reservation, t.nom, t.adresse, t.type, t.prix
+    FROM reservation r
+    JOIN terrain t ON r.idterrain = t.idterrain
+    WHERE r.idutilisateur = ? 
+";
+
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $idutilisateur);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$reservations = [];
+
+while ($row = $result->fetch_assoc()) {
+    // Vérifiez si l'adresse existe dans le résultat
+    if (isset($row['adresse']) && !empty($row['adresse'])) {
+        $row['terrainAdresse'] = $row['adresse'];
+    } else {
+        $row['terrainAdresse'] = "Adresse non disponible";
+    }
+    
+    // Ajouter la date de réservation au tableau
+    $row['date_reservation'] = $row['date_reservation'];
+    
+    $reservations[] = $row;
+}
+
+$stmt->close();
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindYourCourt - Réservation</title>
+    <link rel="stylesheet" href="style_reservations.css">
+</head>
+<body>
+    <!-- En-tête -->
+    <header class="header">
+        <div class="header-center">
+            <img src="image/logo.png" alt="Logo FindYourCourt" class="logo">
+            <h1>FINDYOURCOURT</h1>
+        </div>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="accueil.php">Accueil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenu principal -->
+    <main>
+        <section class="reservation-recap-container">
+            <h2>Récapitulatif des réservations</h2>
+
+            <!-- Affichage de chaque réservation -->
+            <?php if (!empty($reservations)): ?>
+                <?php foreach ($reservations as $reservation): ?>
+                    <div class="reservation-recap">
+                        <div class="reservation-details">
+                            <p><strong>Terrain :</strong> <?php echo $reservation['nom']; ?></p>
+                            <p><strong>Adresse :</strong> <?php echo $reservation['terrainAdresse']; ?></p>
+                            <p><strong>Type :</strong> <?php echo $reservation['type']; ?></p>
+                            <p><strong>Prix :</strong> <?php echo $reservation['prix']; ?></p>
+                            <p><strong>Horaire :</strong> <?php echo $reservation['horaire']; ?></p>
+                            <p><strong>Date de réservation :</strong> <?php echo $reservation['date_reservation']; ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Aucune réservation trouvée.</p>
+            <?php endif; ?>
+        </section>
+    </main>
+
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="faq.php" class="button">FAQ</a>
+            <a href="cgu.php" class="button">CGU</a>
+            <a href="contact.php" class="button">Contacts</a>
+            <a href="mentionslegales.php" class="button">Mentions Légales</a>
+        </div>
+        <p>&copy; 2025 FindYourCourt. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
